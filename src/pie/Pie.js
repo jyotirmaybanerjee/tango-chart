@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Chart from '../Chart';
+import Legend from '../legend/Legend';
 import DataSeries from './DataSeries';
 
 export default class Pie extends Component {
@@ -30,6 +31,7 @@ export default class Pie extends Component {
           <DataSeries data={this.props.data} colors={colors} width=
             {this.props.width} height={this.props.height}/>
         </Chart>
+        <Legend data={this.props.data} colors={colors} width={this.props.width - 100} height={this.props.height} />
       </div>
     );
   }

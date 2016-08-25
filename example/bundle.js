@@ -62,7 +62,7 @@
 
 	var _Pie2 = _interopRequireDefault(_Pie);
 
-	var _Donut = __webpack_require__(179);
+	var _Donut = __webpack_require__(181);
 
 	var _Donut2 = _interopRequireDefault(_Donut);
 
@@ -21495,7 +21495,11 @@
 
 	var _Chart2 = _interopRequireDefault(_Chart);
 
-	var _DataSeries = __webpack_require__(174);
+	var _Legend = __webpack_require__(174);
+
+	var _Legend2 = _interopRequireDefault(_Legend);
+
+	var _DataSeries = __webpack_require__(176);
 
 	var _DataSeries2 = _interopRequireDefault(_DataSeries);
 
@@ -21527,7 +21531,8 @@
 	          _Chart2.default,
 	          { width: this.props.width, height: this.props.height },
 	          _react2.default.createElement(_DataSeries2.default, { data: this.props.data, colors: colors, width: this.props.width, height: this.props.height })
-	        )
+	        ),
+	        _react2.default.createElement(_Legend2.default, { data: this.props.data, colors: colors, width: this.props.width - 100, height: this.props.height })
 	      );
 	    }
 	  }]);
@@ -21621,13 +21626,138 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _d3Shape = __webpack_require__(175);
+	var _LegendElement = __webpack_require__(175);
 
-	var _Sector = __webpack_require__(177);
+	var _LegendElement2 = _interopRequireDefault(_LegendElement);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Legend = function (_Component) {
+	  _inherits(Legend, _Component);
+
+	  function Legend(props) {
+	    _classCallCheck(this, Legend);
+
+	    return _possibleConstructorReturn(this, (Legend.__proto__ || Object.getPrototypeOf(Legend)).call(this, props));
+	  }
+
+	  _createClass(Legend, [{
+	    key: 'render',
+	    value: function render() {
+	      var color = this.props.colors;
+	      var data = this.props.data;
+	      var elements = data.map(function (item, i) {
+	        return _react2.default.createElement(_LegendElement2.default, { color: color, xpos: '0', ypos: 100 + i * 20, data: item.name, key: i, ikey: i });
+	      });
+
+	      return _react2.default.createElement(
+	        'svg',
+	        { className: 'legend', width: this.props.width, height: this.props.height },
+	        elements
+	      );
+	    }
+	  }]);
+
+	  return Legend;
+	}(_react.Component);
+
+	exports.default = Legend;
+
+
+	Legend.propTypes = {
+	  width: _react.PropTypes.number,
+	  height: _react.PropTypes.number,
+	  colors: _react.PropTypes.array.isRequired,
+	  data: _react.PropTypes.array.isRequired
+	};
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LegendElement = function (_React$Component) {
+	  _inherits(LegendElement, _React$Component);
+
+	  function LegendElement(props) {
+	    _classCallCheck(this, LegendElement);
+
+	    return _possibleConstructorReturn(this, (LegendElement.__proto__ || Object.getPrototypeOf(LegendElement)).call(this, props));
+	  }
+
+	  _createClass(LegendElement, [{
+	    key: "render",
+	    value: function render() {
+	      var position = "translate(" + this.props.xpos + "," + this.props.ypos + ")";
+	      return _react2.default.createElement(
+	        "g",
+	        { transform: position },
+	        _react2.default.createElement("rect", { width: "18", height: "18", fill: this.props.color[this.props.ikey] }),
+	        _react2.default.createElement(
+	          "text",
+	          { x: "24", y: "9", dy: ".35em" },
+	          this.props.data
+	        )
+	      );
+	    }
+	  }]);
+
+	  return LegendElement;
+	}(_react2.default.Component);
+
+	exports.default = LegendElement;
+
+
+	LegendElement.propTypes = {};
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _d3Shape = __webpack_require__(177);
+
+	var _Sector = __webpack_require__(179);
 
 	var _Sector2 = _interopRequireDefault(_Sector);
 
-	var _DonutSector = __webpack_require__(178);
+	var _DonutSector = __webpack_require__(180);
 
 	var _DonutSector2 = _interopRequireDefault(_DonutSector);
 
@@ -21699,12 +21829,12 @@
 	};
 
 /***/ },
-/* 175 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org/d3-shape/ Version 1.0.3. Copyright 2016 Mike Bostock.
 	(function (global, factory) {
-	   true ? factory(exports, __webpack_require__(176)) :
+	   true ? factory(exports, __webpack_require__(178)) :
 	  typeof define === 'function' && define.amd ? define(['exports', 'd3-path'], factory) :
 	  (factory((global.d3 = global.d3 || {}),global.d3));
 	}(this, (function (exports,d3Path) { 'use strict';
@@ -23519,7 +23649,7 @@
 	})));
 
 /***/ },
-/* 176 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org/d3-path/ Version 1.0.1. Copyright 2016 Mike Bostock.
@@ -23679,7 +23809,7 @@
 	}));
 
 /***/ },
-/* 177 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23694,7 +23824,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _d3Shape = __webpack_require__(175);
+	var _d3Shape = __webpack_require__(177);
 
 	var shapes = _interopRequireWildcard(_d3Shape);
 
@@ -23754,7 +23884,7 @@
 	Sector.propTypes = {};
 
 /***/ },
-/* 178 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23769,7 +23899,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _d3Shape = __webpack_require__(175);
+	var _d3Shape = __webpack_require__(177);
 
 	var shapes = _interopRequireWildcard(_d3Shape);
 
@@ -23850,7 +23980,7 @@
 	DonutSector.propTypes = {};
 
 /***/ },
-/* 179 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23869,7 +23999,11 @@
 
 	var _Chart2 = _interopRequireDefault(_Chart);
 
-	var _DataSeries = __webpack_require__(174);
+	var _Legend = __webpack_require__(174);
+
+	var _Legend2 = _interopRequireDefault(_Legend);
+
+	var _DataSeries = __webpack_require__(176);
 
 	var _DataSeries2 = _interopRequireDefault(_DataSeries);
 
@@ -23901,7 +24035,8 @@
 	          _Chart2.default,
 	          { width: this.props.width, height: this.props.height },
 	          _react2.default.createElement(_DataSeries2.default, { data: this.props.data, colors: colors, width: this.props.width, height: this.props.height, donut: true })
-	        )
+	        ),
+	        _react2.default.createElement(_Legend2.default, { data: this.props.data, colors: colors, width: this.props.width - 100, height: this.props.height })
 	      );
 	    }
 	  }]);
