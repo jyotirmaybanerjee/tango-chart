@@ -1,12 +1,12 @@
 {
   "name": "tango-chart",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "private": true,
   "description": "A slick charting library for react.",
   "main": "index.js",
   "scripts": {
-    "test": "make test",
-    "compile": "babel -d lib/ src/",
-    "prepublish": "npm run compile"
+    "build:example": "reactpack --no-extract --no-source-map --no-html example/index.js example/",
+    "prepublish": "./node_modules/.bin/babel -d lib src/"
   },
   "repository": {
     "type": "git",
@@ -30,21 +30,23 @@
     "url": "https://github.com/jyotirmaybanerjee/tango-chart/issues"
   },
   "homepage": "https://github.com/jyotirmaybanerjee/tango-chart#readme",
+  "peerDependencies": {
+    "react": "^15.0.0 || ^0.14.0"
+  },
   "devDependencies": {
-    "babel-core": "^6.13.2",
+    "babel-cli": "^6.11.4",
     "babel-eslint": "^6.1.2",
-    "babel-loader": "^6.2.5",
-    "babel-plugin-react-transform": "^2.0.2",
-    "babel-plugin-transform-react-display-name": "^6.8.0",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
-    "babel-preset-stage-2": "^6.13.0",
-    "babel-runtime": "^6.11.6",
-    "chai": "^3.5.0",
-    "mocha": "^3.0.2"
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint-plugin-react": "^6.1.2",
+    "react": "^15.3.1",
+    "react-autosuggest": "^5.1.0",
+    "react-dom": "^15.3.1",
+    "react-input-autosize": "^1.1.0",
+    "reactpack": "^0.7.5"
   },
   "dependencies": {
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1"
+    "d3-shape": "^1.0.3"
   }
 }
