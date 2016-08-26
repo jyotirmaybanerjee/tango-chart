@@ -7,11 +7,11 @@ export default class Legend extends Component {
   }
 
   render() {
-    let color = this.props.colors;
     let data = this.props.data;
     let elements = data.map(function(item, i){
+      console.log('item- ', item);
       return (
-        <LegendElement color={color} xpos="0" ypos={100+i*20} data={item.name} key={i} ikey={i}/>
+        <LegendElement xpos="0" ypos={100+i*20} color={item.color} data={item.name} key={i}/>
       )
     });
 
@@ -24,6 +24,5 @@ export default class Legend extends Component {
 Legend.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
-  colors: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired
 };

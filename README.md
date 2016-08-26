@@ -4,6 +4,7 @@ A slick charting library for react.
 
 Reusable Chart Components React D3 Bar line scattered plot pie
 
+[Demo](https://rawgit.com/jyotirmaybanerjee/tango-chart/master/example/index.html)
 
 ## Install
 

@@ -35,16 +35,13 @@ export default class DonutSector extends Component {
     let data = this.props.data;
     let center = 'translate(' + arc.centroid(data) + ')';
     let percentCenter = 'translate(0,3)';
-    let color = this.props.colors;
+    // let color = this.props.color;
     return (
       <g onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut} onClick={this.onClick}>
-        <path className={this.state.opacity} fill={color[this.props.index]} d={arc(this.props.data)}></path>
+        <path className={this.state.opacity} fill={this.props.color} d={arc(this.props.data)}></path>
         <text fill="white" transform={center} textAnchor="middle" fontSize="15px">{data.value}</text>
-        <text fill={color[this.props.index]} stroke={color} fontSize="15px" transform={percentCenter} textAnchor="middle">{this.state.text}</text>
+        <text fill={this.props.color} stroke={this.props.color} fontSize="15px" transform={percentCenter} textAnchor="middle">{this.state.text}</text>
       </g>
     );
   }
 }
-
-DonutSector.propTypes = {
-};

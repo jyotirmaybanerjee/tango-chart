@@ -6,13 +6,18 @@ import DonutSector from './DonutSector';
 
 export default class DataSeries extends Component {
 
+  static propTypes = {
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    data: PropTypes.array.isRequired
+  }
+
   constructor(props) {
     super(props);
   }
 
   render() {
 
-    let color = this.props.colors;
     let data = this.props.data;
     let width = this.props.width;
     let height = this.props.height;
@@ -31,12 +36,12 @@ export default class DataSeries extends Component {
 
       if(self.props.donut) {
         return (
-          <DonutSector data={point} key={i} index={i} name={names[i]} colors={color} total=
+          <DonutSector data={point} key={i} index={i} name={names[i]} color={self.props.data[i].color} total=
             {sum} width={width} height={height} />
         )
       } else {
         return (
-          <Sector data={point} key={i} index={i} name={names[i]} colors={color} total=
+          <Sector data={point} key={i} index={i} name={names[i]} color={self.props.data[i].color} total=
             {sum} width={width} height={height} />
         )
       }
@@ -46,10 +51,3 @@ export default class DataSeries extends Component {
     );
   }
 }
-
-DataSeries.propTypes = {
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  color: PropTypes.array,
-  data: PropTypes.array.isRequired
-};

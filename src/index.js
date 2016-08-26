@@ -9,11 +9,13 @@
 
 import Donut from './pie/Donut';
 import Pie from './pie/Pie';
+import BarChart from './pie/BarChart';
 
 /**
  * Different UI components.
  */
 module.exports = {
-  Pie: Pie,
-  Donut: Donut
+  Pie,
+  Donut,
+  BarChart
 };

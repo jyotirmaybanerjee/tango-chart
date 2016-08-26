@@ -16,7 +16,7 @@ export default class Pie extends Component {
     width: 300,
     height: 350,
     title: '',
-    Legend: true
+    legend: true
   }
 
   constructor(props) {
@@ -24,14 +24,18 @@ export default class Pie extends Component {
   }
 
   render() {
-    let colors = ['#FD9827', '#DA3B21', '#3669C9', '#1D9524', '#971497'];
+
+    let legend = <span />;
+    if(this.props.legend) {
+      legend = <Legend data={this.props.data} width={this.props.width - 100} height={this.props.height} />;
+    }
     return (
       <div>
         <Chart width={this.props.width} height={this.props.height}>
-          <DataSeries data={this.props.data} colors={colors} width=
+          <DataSeries data={this.props.data} width=
             {this.props.width} height={this.props.height}/>
         </Chart>
-        <Legend data={this.props.data} colors={colors} width={this.props.width - 100} height={this.props.height} />
+        {legend}
       </div>
     );
   }
