@@ -24,7 +24,7 @@ export default class BarChart extends Component {
 
   render() {
     return (
-      <Chart width={this.props.width} height={this.props.height}>
+      <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
         <DataSeries data={this.props.data} width={this.props.width} height={this.props.height} color="cornflowerblue" />
       </Chart>
     );

@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import * as shapes from 'd3-shape';
+import d3 from 'd3';
 
 export default class DonutSector extends Component {
 
@@ -29,7 +29,7 @@ export default class DonutSector extends Component {
   render() {
     let outerRadius = this.props.width/2.2;
     let innerRadius = this.props.width/8;
-    let arc = shapes.arc()
+    let arc = d3.svg.arc()
       .outerRadius(outerRadius)
       .innerRadius(innerRadius);
     let data = this.props.data;

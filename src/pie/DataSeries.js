@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {pie} from 'd3-shape';
+import d3 from 'd3';
 
 import Sector from './Sector';
 import DonutSector from './DonutSector';
@@ -21,7 +21,7 @@ export default class DataSeries extends Component {
     let data = this.props.data;
     let width = this.props.width;
     let height = this.props.height;
-    let pieLayout = pie();
+    let pie = d3.layout.pie();
     let result = data.map(function(item){
       return item.count;
     });
@@ -30,7 +30,7 @@ export default class DataSeries extends Component {
     });
     let sum = result.reduce(function(memo, num){ return memo + num; }, 0);
     let position = 'translate(' + (width)/2 + ',' + (height)/2 + ')';
-    let arcs = pieLayout(result);
+    let arcs = pie(result);
     let self = this;
     let bars = arcs.map(function(point, i) {
 

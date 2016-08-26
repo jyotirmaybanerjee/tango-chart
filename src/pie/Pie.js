@@ -15,8 +15,7 @@ export default class Pie extends Component {
   static defaultProps = {
     width: 300,
     height: 350,
-    title: '',
-    legend: true
+    title: ''
   }
 
   constructor(props) {
@@ -31,7 +30,7 @@ export default class Pie extends Component {
     }
     return (
       <div>
-        <Chart width={this.props.width} height={this.props.height}>
+        <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
           <DataSeries data={this.props.data} width=
             {this.props.width} height={this.props.height}/>
         </Chart>

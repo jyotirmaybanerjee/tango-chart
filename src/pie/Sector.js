@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import * as shapes from 'd3-shape';
+import d3 from 'd3';
 
 export default class Sector extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export default class Sector extends Component {
   render() {
     let outerRadius = this.props.width/2.2;
     let innerRadius = 0;
-    let arc = shapes.arc()
+    let arc = d3.svg.arc()
       .outerRadius(outerRadius)
       .innerRadius(innerRadius);
     let data = this.props.data;

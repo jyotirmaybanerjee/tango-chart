@@ -8,6 +8,7 @@ export default class Chart extends Component {
   render() {
     return (
       <svg width={this.props.width} height={this.props.height}>
+        <text textAnchor="middle" x="150" y="15">{this.props.title}</text>
         {this.props.children}
       </svg>
     );

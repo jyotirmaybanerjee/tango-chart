@@ -5,7 +5,6 @@ import Bar from './Bar';
 
 export default class DataSeries extends Component {
 
-
   static propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
