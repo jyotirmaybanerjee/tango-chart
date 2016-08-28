@@ -11,6 +11,7 @@ import Donut from './pie/Donut';
 import Pie from './pie/Pie';
 import BarChart from './pie/BarChart';
 import ScatteredPlot from './scattered/ScatteredPlot';
+import LineChart from './line/LineChart';
 
 /**
  * Different UI components.
@@ -19,5 +20,6 @@ module.exports = {
   Pie,
   Donut,
   BarChart,
-  ScatteredPlot
+  ScatteredPlot,
+  LineChart
 };

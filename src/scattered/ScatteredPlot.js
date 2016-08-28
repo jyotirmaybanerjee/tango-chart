@@ -4,33 +4,14 @@ import Chart from '../Chart';
 import DataCircles  from './DataCircles';
 import XYAxis       from '../axis/XYAxis';
 
-// import D3Helpers       from '../helpers/D3Helpers';
-
-  // Returns the largest X coordinate from the data set
-  const xMax   = (data)  => d3.max(data, (d) => d[0]);
-
-  // Returns the higest Y coordinate from the data set
-  const yMax   = (data)  => d3.max(data, (d) => d[1]);
-
-  // Returns a function that "scales" X coordinates from the data to fit the chart
-  const xScale = (props) => {
-    return d3.scale.linear()
-      .domain([0, xMax(props.data)])
-      .range([props.padding, props.width - props.padding * 2]);
-  };
-
-  // Returns a function that "scales" Y coordinates from the data to fit the chart
-  const yScale = (props) => {
-    return d3.scale.linear()
-      .domain([0, yMax(props.data)])
-      .range([props.height - props.padding, props.padding]);
-  };
+import {xScale, yScale} from '../helpers/D3Helpers';
 
 export default class ScatteredPlot extends Component {
 
   static propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
+    padding: PropTypes.number,
     title: PropTypes.string,
     data: PropTypes.array.isRequired
   }
@@ -38,6 +19,7 @@ export default class ScatteredPlot extends Component {
   static defaultProps = {
     width: 300,
     height: 350,
+    padding: 0,
     title: '',
     Legend: true
   }
@@ -47,15 +29,12 @@ export default class ScatteredPlot extends Component {
   }
 
   render() {
-    const scales = { xScale: xScale(this.props), yScale: yScale(this.props) };
+    const scales = { xScale: xScale(this.props.padding, this.props.width, this.props.data), yScale: yScale(this.props.padding, this.props.height, this.props.data) };
     return (
         <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
           <DataCircles {...this.props} {...scales} />
-          <XYAxis {...this.props} {...scales} />
+          <XYAxis height={this.props.height} width={this.props.width} height={this.props.height} padding={this.props.padding} {...scales}/>
         </Chart>
     );
   }
 }
-
-ScatteredPlot.propTypes = {
-};

@@ -23,10 +23,10 @@ export default class DataSeries extends Component {
     let height = this.props.height;
     let pie = d3.layout.pie();
     let result = data.map(function(item){
-      return item.count;
+      return item.value;
     });
     let names = data.map(function(item){
-      return item.name;
+      return item.label;
     });
     let sum = result.reduce(function(memo, num){ return memo + num; }, 0);
     let position = 'translate(' + (width)/2 + ',' + (height)/2 + ')';

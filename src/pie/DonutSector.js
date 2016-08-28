@@ -23,12 +23,12 @@ export default class DonutSector extends Component {
   }
 
   onClick = () => {
-    console.log('You clicked ' + this.props.name);
+    console.log('You clicked ' + this.props.label);
   }
 
   render() {
     let outerRadius = this.props.width/2.2;
-    let innerRadius = this.props.width/8;
+    let innerRadius = this.props.width/5;
     let arc = d3.svg.arc()
       .outerRadius(outerRadius)
       .innerRadius(innerRadius);
@@ -38,7 +38,7 @@ export default class DonutSector extends Component {
     // let color = this.props.color;
     return (
       <g onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut} onClick={this.onClick}>
-        <path className={this.state.opacity} fill={this.props.color} d={arc(this.props.data)}></path>
+        <path className={this.state.opacity} fill={this.props.color} d={arc(this.props.data)} />
         <text fill="white" transform={center} textAnchor="middle" fontSize="15px">{data.value}</text>
         <text fill={this.props.color} stroke={this.props.color} fontSize="15px" transform={percentCenter} textAnchor="middle">{this.state.text}</text>
       </g>

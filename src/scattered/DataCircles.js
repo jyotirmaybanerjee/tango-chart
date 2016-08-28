@@ -15,20 +15,8 @@ const renderCircles = (props) => {
 export default class DataCircles extends Component {
 
   static propTypes = {
-    // width: PropTypes.number,
-    // height: PropTypes.number,
-    // title: PropTypes.string,
-    // data: PropTypes.array.isRequired
+    data: PropTypes.array.isRequired
   }
-
-  static defaultProps = {
-    // width: 300,
-    // height: 350,
-    // title: '',
-    // Legend: true
-  }
-
-
 
   render() {
     return <g>{ this.props.data.map(renderCircles(this.props)) }</g>

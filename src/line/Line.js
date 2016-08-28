@@ -1,30 +1,22 @@
-import React, {PropTypes} from 'react';
-import Chart from '../Chart';
+import React, {PropTypes, Component} from 'react';
 
-export default class Line extends React.Component {
+export default class Line extends Component {
 
   static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
-    title: PropTypes.string,
-    data: PropTypes.array.isRequired
+    path: PropTypes.string,
+    color: PropTypes.string,
+    width: PropTypes.number
   }
 
   static defaultProps = {
-    width: 300,
-    height: 350,
-    title: '',
-    Legend: true
-  }
-
-  constructor(props) {
-    super(props);
+    path: '',
+    color: 'blue',
+    width: 2
   }
 
   render() {
-    return (<div>MyComponent</div>);
+    return (
+      <path d={this.props.path} stroke={this.props.color} strokeWidth={this.props.width} fill="none" />
+    );
   }
 }
-
-Line.propTypes = {
-};

@@ -10,7 +10,7 @@ export default class Legend extends Component {
     let data = this.props.data;
     let elements = data.map(function(item, i){
       return (
-        <LegendElement xpos="0" ypos={100+i*20} color={item.color} data={item.name} key={i}/>
+        <LegendElement xpos="0" ypos={100+i*20} color={item.color} data={item.label} key={i}/>
       )
     });
 

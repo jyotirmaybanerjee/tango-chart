@@ -15,7 +15,7 @@ export default class LegendElement extends React.Component {
     var position =  'translate(' + this.props.xpos + ',' + this.props.ypos + ')';
     return (
       <g transform={position}>
-        <rect width="18" height="18" fill={this.props.color}></rect>
+        <rect width="18" height="18" fill={this.props.color} />
         <text x="24" y="9" dy=".35em">{this.props.data}</text>
       </g>
     );

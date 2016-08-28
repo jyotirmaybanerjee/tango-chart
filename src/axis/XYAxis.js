@@ -4,17 +4,15 @@ import Axis from './axis';
 export default class XYAxis extends Component {
 
   static propTypes = {
-    // width: PropTypes.number,
-    // height: PropTypes.number,
-    // title: PropTypes.string,
-    // data: PropTypes.array.isRequired
+    width: PropTypes.number,
+    height: PropTypes.number,
+    padding: PropTypes.number
   }
 
   static defaultProps = {
-    // width: 300,
-    // height: 350,
-    // title: '',
-    // Legend: true
+    width: 300,
+    height: 350,
+    padding: 5
   }
 
   constructor(props) {

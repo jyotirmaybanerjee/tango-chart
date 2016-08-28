@@ -20,7 +20,7 @@ export default class Sector extends Component {
     let center = 'translate(' + arc.centroid(data) + ')';
     return (
       <g>
-        <path fill={this.props.color} d={arc(this.props.data)}></path>
+        <path fill={this.props.color} d={arc(this.props.data)} />
         <text fill="white" transform={center} textAnchor="middle" fontSize="15px">
           {data.value}
         </text>

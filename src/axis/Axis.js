@@ -22,7 +22,7 @@ export default class Axis extends React.Component {
   }
 
   render() {
-    return <g className="axis" ref="axis" transform={this.props.translate}></g>;
+    return <g className="axis" ref="axis" transform={this.props.translate} />;
   }
 }
 

@@ -72,9 +72,17 @@
 
 	var _BarChart2 = _interopRequireDefault(_BarChart);
 
-	var _ScatteredPlot = __webpack_require__(184);
+	var _StackedBarChart = __webpack_require__(186);
+
+	var _StackedBarChart2 = _interopRequireDefault(_StackedBarChart);
+
+	var _ScatteredPlot = __webpack_require__(189);
 
 	var _ScatteredPlot2 = _interopRequireDefault(_ScatteredPlot);
+
+	var _LineChart = __webpack_require__(192);
+
+	var _LineChart2 = _interopRequireDefault(_LineChart);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -129,7 +137,11 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      var data = [{ name: 'Apples', count: 10, color: '#FD9827' }, { name: 'Oranges', count: 20, color: '#DA3B21' }, { name: 'Bananas', count: 5, color: '#3669C9' }, { name: 'Blueberries', count: 42, color: '#1D9524' }, { name: 'mangoes ', count: 29, color: '#971497' }];
+	      var data = [{ label: 'Apples', value: 10, color: '#FD9827' }, { label: 'Oranges', value: 20, color: '#DA3B21' }, { label: 'Bananas', value: 5, color: '#3669C9' }, { label: 'Blueberries', value: 42, color: '#1D9524' }, { label: 'mangoes ', value: 29, color: '#971497' }];
+
+	      var stackData = [{ 'data': [30, 10, 5, 8, 15, 10], 'label': 'series1', 'color': '#FD9827' }, { 'data': [5, 20, 12, 4, 6, 2], 'label': 'series2', 'color': '#DA3B21' }, { 'data': [5, 8, 2, 4, 6, 2], 'label': 'series3', 'color': '#1D9524' }];
+
+	      var lineData = [{ 'data': [{ x: 0, y: 20 }, { x: 1, y: 30 }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 }], 'label': 'series1', 'color': '#FD9827' }, { 'data': [{ x: 0, y: 8 }, { x: 1, y: 5 }, { x: 2, y: 20 }, { x: 3, y: 12 }, { x: 4, y: 4 }, { x: 5, y: 6 }, { x: 6, y: 2 }], 'label': 'series2', 'color': '#DA3B21' }, { 'data': [{ x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2 }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 }], 'label': 'series3', 'color': '#1D9524' }, { 'data': [{ x: 0, y: 5 }, { x: 1, y: 8 }, { x: 2, y: 9 }, { x: 3, y: 4 }, { x: 4, y: 8 }, { x: 5, y: 2 }, { x: 6, y: 12 }], 'label': 'series4', 'color': '#971497' }];
 
 	      return _react2.default.createElement(
 	        'div',
@@ -163,7 +175,27 @@
 	            'BarChart'
 	          )
 	        ),
-	        _react2.default.createElement(_BarChart2.default, { data: [30, 10, 5, 8, 15, 10], title: 'Simple Bar' }),
+	        _react2.default.createElement(_BarChart2.default, { data: data, color: 'cornflowerblue' }),
+	        _react2.default.createElement(
+	          'article',
+	          null,
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            'Multicolor BarChart'
+	          )
+	        ),
+	        _react2.default.createElement(_BarChart2.default, { data: data }),
+	        _react2.default.createElement(
+	          'article',
+	          null,
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            'StackedBarChart'
+	          )
+	        ),
+	        _react2.default.createElement(_StackedBarChart2.default, { data: stackData }),
 	        _react2.default.createElement(
 	          'article',
 	          null,
@@ -183,7 +215,17 @@
 	                return _this2.randomizeData();
 	              } },
 	            'Randomize Data'
-	          )
+	          ),
+	          _react2.default.createElement(
+	            'article',
+	            null,
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'LineChart'
+	            )
+	          ),
+	          _react2.default.createElement(_LineChart2.default, { data: lineData })
 	        )
 	      );
 	    }
@@ -21733,7 +21775,7 @@
 	    value: function render() {
 	      var data = this.props.data;
 	      var elements = data.map(function (item, i) {
-	        return _react2.default.createElement(_LegendElement2.default, { xpos: '0', ypos: 100 + i * 20, color: item.color, data: item.name, key: i });
+	        return _react2.default.createElement(_LegendElement2.default, { xpos: '0', ypos: 100 + i * 20, color: item.color, data: item.label, key: i });
 	      });
 
 	      return _react2.default.createElement(
@@ -21869,10 +21911,10 @@
 	      var height = this.props.height;
 	      var pie = _d2.default.layout.pie();
 	      var result = data.map(function (item) {
-	        return item.count;
+	        return item.value;
 	      });
 	      var names = data.map(function (item) {
-	        return item.name;
+	        return item.label;
 	      });
 	      var sum = result.reduce(function (memo, num) {
 	        return memo + num;
@@ -31582,7 +31624,7 @@
 	    };
 
 	    _this.onClick = function () {
-	      console.log('You clicked ' + _this.props.name);
+	      console.log('You clicked ' + _this.props.label);
 	    };
 
 	    _this.state = {
@@ -31596,7 +31638,7 @@
 	    key: 'render',
 	    value: function render() {
 	      var outerRadius = this.props.width / 2.2;
-	      var innerRadius = this.props.width / 8;
+	      var innerRadius = this.props.width / 5;
 	      var arc = _d2.default.svg.arc().outerRadius(outerRadius).innerRadius(innerRadius);
 	      var data = this.props.data;
 	      var center = 'translate(' + arc.centroid(data) + ')';
@@ -31733,6 +31775,10 @@
 
 	var _DataSeries2 = _interopRequireDefault(_DataSeries);
 
+	var _XYAxis = __webpack_require__(184);
+
+	var _XYAxis2 = _interopRequireDefault(_XYAxis);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31753,10 +31799,11 @@
 	  _createClass(BarChart, [{
 	    key: 'render',
 	    value: function render() {
+
 	      return _react2.default.createElement(
 	        _Chart2.default,
 	        { width: this.props.width, height: this.props.height, title: this.props.title },
-	        _react2.default.createElement(_DataSeries2.default, { data: this.props.data, width: this.props.width, height: this.props.height, color: 'cornflowerblue' })
+	        _react2.default.createElement(_DataSeries2.default, { data: this.props.data, width: this.props.width, padding: this.props.padding, height: this.props.height, color: this.props.color })
 	      );
 	    }
 	  }]);
@@ -31767,14 +31814,15 @@
 	BarChart.propTypes = {
 	  width: _react.PropTypes.number,
 	  height: _react.PropTypes.number,
+	  padding: _react.PropTypes.number,
 	  title: _react.PropTypes.string,
 	  data: _react.PropTypes.array.isRequired
 	};
 	BarChart.defaultProps = {
 	  width: 300,
 	  height: 350,
-	  title: '',
-	  Legend: true
+	  padding: 30,
+	  title: ''
 	};
 	exports.default = BarChart;
 
@@ -31823,13 +31871,17 @@
 	    key: 'render',
 	    value: function render() {
 
+	      var dataArray = this.props.data.map(function (item) {
+	        return item.value;
+	      });
+
 	      var props = this.props;
-	      var yScale = _d2.default.scale.linear().domain([0, _d2.default.max(this.props.data)]).range([0, this.props.height]);
+	      var yScale = _d2.default.scale.linear().domain([0, _d2.default.max(dataArray)]).range([0, this.props.height]);
 
 	      var xScale = _d2.default.scale.ordinal().domain(_d2.default.range(this.props.data.length)).rangeRoundBands([0, this.props.width], 0.05);
 
 	      var bars = this.props.data.map(function (point, i) {
-	        return _react2.default.createElement(_Bar2.default, { height: yScale(point), width: xScale.rangeBand(), offset: xScale(i), availableHeight: props.height, color: props.color, key: i });
+	        return _react2.default.createElement(_Bar2.default, { height: yScale(point.value), width: xScale.rangeBand(), offset: xScale(i), availableHeight: props.height, color: props.color || point.color, key: i });
 	      });
 
 	      return _react2.default.createElement(
@@ -31847,12 +31899,12 @@
 	  width: _react.PropTypes.number,
 	  height: _react.PropTypes.number,
 	  data: _react.PropTypes.array.isRequired,
-	  offset: _react.PropTypes.number
+	  padding: _react.PropTypes.number
 	};
 	DataSeries.defaultProps = {
 	  width: 0,
 	  height: 0,
-	  offset: 0
+	  padding: 0
 	};
 	exports.default = DataSeries;
 
@@ -31931,196 +31983,13 @@
 	  value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _d = __webpack_require__(177);
-
-	var _d2 = _interopRequireDefault(_d);
-
-	var _Chart = __webpack_require__(173);
-
-	var _Chart2 = _interopRequireDefault(_Chart);
-
-	var _DataCircles = __webpack_require__(185);
-
-	var _DataCircles2 = _interopRequireDefault(_DataCircles);
-
-	var _XYAxis = __webpack_require__(186);
-
-	var _XYAxis2 = _interopRequireDefault(_XYAxis);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	// import D3Helpers       from '../helpers/D3Helpers';
-
-	// Returns the largest X coordinate from the data set
-	var xMax = function xMax(data) {
-	  return _d2.default.max(data, function (d) {
-	    return d[0];
-	  });
-	};
-
-	// Returns the higest Y coordinate from the data set
-	var yMax = function yMax(data) {
-	  return _d2.default.max(data, function (d) {
-	    return d[1];
-	  });
-	};
-
-	// Returns a function that "scales" X coordinates from the data to fit the chart
-	var xScale = function xScale(props) {
-	  return _d2.default.scale.linear().domain([0, xMax(props.data)]).range([props.padding, props.width - props.padding * 2]);
-	};
-
-	// Returns a function that "scales" Y coordinates from the data to fit the chart
-	var yScale = function yScale(props) {
-	  return _d2.default.scale.linear().domain([0, yMax(props.data)]).range([props.height - props.padding, props.padding]);
-	};
-
-	var ScatteredPlot = function (_Component) {
-	  _inherits(ScatteredPlot, _Component);
-
-	  function ScatteredPlot(props) {
-	    _classCallCheck(this, ScatteredPlot);
-
-	    return _possibleConstructorReturn(this, (ScatteredPlot.__proto__ || Object.getPrototypeOf(ScatteredPlot)).call(this, props));
-	  }
-
-	  _createClass(ScatteredPlot, [{
-	    key: 'render',
-	    value: function render() {
-	      var scales = { xScale: xScale(this.props), yScale: yScale(this.props) };
-	      return _react2.default.createElement(
-	        _Chart2.default,
-	        { width: this.props.width, height: this.props.height, title: this.props.title },
-	        _react2.default.createElement(_DataCircles2.default, _extends({}, this.props, scales)),
-	        _react2.default.createElement(_XYAxis2.default, _extends({}, this.props, scales))
-	      );
-	    }
-	  }]);
-
-	  return ScatteredPlot;
-	}(_react.Component);
-
-	ScatteredPlot.propTypes = {
-	  width: _react.PropTypes.number,
-	  height: _react.PropTypes.number,
-	  title: _react.PropTypes.string,
-	  data: _react.PropTypes.array.isRequired
-	};
-	ScatteredPlot.defaultProps = {
-	  width: 300,
-	  height: 350,
-	  title: '',
-	  Legend: true
-	};
-	exports.default = ScatteredPlot;
-
-
-	ScatteredPlot.propTypes = {};
-
-/***/ },
-/* 185 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var renderCircles = function renderCircles(props) {
-	  return function (coords, index) {
-	    var circleProps = {
-	      cx: props.xScale(coords[0]),
-	      cy: props.yScale(coords[1]),
-	      r: 2,
-	      key: index
-	    };
-	    return _react2.default.createElement('circle', circleProps);
-	  };
-	};
-
-	var DataCircles = function (_Component) {
-	  _inherits(DataCircles, _Component);
-
-	  function DataCircles() {
-	    _classCallCheck(this, DataCircles);
-
-	    return _possibleConstructorReturn(this, (DataCircles.__proto__ || Object.getPrototypeOf(DataCircles)).apply(this, arguments));
-	  }
-
-	  _createClass(DataCircles, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'g',
-	        null,
-	        this.props.data.map(renderCircles(this.props))
-	      );
-	    }
-	  }]);
-
-	  return DataCircles;
-	}(_react.Component);
-
-	DataCircles.propTypes = {
-	  // width: PropTypes.number,
-	  // height: PropTypes.number,
-	  // title: PropTypes.string,
-	  // data: PropTypes.array.isRequired
-	};
-	DataCircles.defaultProps = {
-	  // width: 300,
-	  // height: 350,
-	  // title: '',
-	  // Legend: true
-	};
-	exports.default = DataCircles;
-
-/***/ },
-/* 186 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _axis = __webpack_require__(187);
+	var _axis = __webpack_require__(185);
 
 	var _axis2 = _interopRequireDefault(_axis);
 
@@ -32168,21 +32037,19 @@
 	}(_react.Component);
 
 	XYAxis.propTypes = {
-	  // width: PropTypes.number,
-	  // height: PropTypes.number,
-	  // title: PropTypes.string,
-	  // data: PropTypes.array.isRequired
+	  width: _react.PropTypes.number,
+	  height: _react.PropTypes.number,
+	  padding: _react.PropTypes.number
 	};
 	XYAxis.defaultProps = {
-	  // width: 300,
-	  // height: 350,
-	  // title: '',
-	  // Legend: true
+	  width: 300,
+	  height: 350,
+	  padding: 5
 	};
 	exports.default = XYAxis;
 
 /***/ },
-/* 187 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32249,6 +32116,658 @@
 
 
 	Axis.propTypes = {};
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _d = __webpack_require__(177);
+
+	var _d2 = _interopRequireDefault(_d);
+
+	var _StackedDataSeries = __webpack_require__(187);
+
+	var _StackedDataSeries2 = _interopRequireDefault(_StackedDataSeries);
+
+	var _Chart = __webpack_require__(173);
+
+	var _Chart2 = _interopRequireDefault(_Chart);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var StackedBarChart = function (_Component) {
+	  _inherits(StackedBarChart, _Component);
+
+	  function StackedBarChart(props) {
+	    _classCallCheck(this, StackedBarChart);
+
+	    return _possibleConstructorReturn(this, (StackedBarChart.__proto__ || Object.getPrototypeOf(StackedBarChart)).call(this, props));
+	  }
+
+	  _createClass(StackedBarChart, [{
+	    key: 'render',
+	    value: function render() {
+
+	      var self = this;
+	      var data = this.props.data;
+	      var size = { width: this.props.width, height: this.props.height };
+	      var totals = [];
+	      var stackedSerieses = [];
+	      data.forEach(function (element, index, array) {
+	        element.data.forEach(function (element, index, array) {
+	          if (totals[index]) {
+	            totals[index] = totals[index] + element;
+	          } else {
+	            totals[index] = element;
+	          }
+	        });
+	      });
+	      var yScale = _d2.default.scale.linear().domain([0, _d2.default.max(totals)]).range([0, this.props.height]);
+	      data.forEach(function (element, index, array) {
+	        stackedSerieses.push(_react2.default.createElement(_StackedDataSeries2.default, { key: element.label, data: element.data, label: element.label, color: element.color, size: size, yScale: yScale, allSeries: self.props.data }));
+	      });
+
+	      return _react2.default.createElement(
+	        _Chart2.default,
+	        { width: this.props.width, height: this.props.height },
+	        stackedSerieses
+	      );
+	    }
+	  }]);
+
+	  return StackedBarChart;
+	}(_react.Component);
+
+	StackedBarChart.propTypes = {
+	  width: _react.PropTypes.number,
+	  height: _react.PropTypes.number
+	};
+	StackedBarChart.defaultProps = {
+	  width: 600,
+	  height: 300
+	};
+	exports.default = StackedBarChart;
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _StackedBar = __webpack_require__(188);
+
+	var _StackedBar2 = _interopRequireDefault(_StackedBar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var StackedDataSeries = function (_Component) {
+	  _inherits(StackedDataSeries, _Component);
+
+	  function StackedDataSeries(props) {
+	    _classCallCheck(this, StackedDataSeries);
+
+	    return _possibleConstructorReturn(this, (StackedDataSeries.__proto__ || Object.getPrototypeOf(StackedDataSeries)).call(this, props));
+	  }
+
+	  _createClass(StackedDataSeries, [{
+	    key: 'render',
+	    value: function render() {
+
+	      console.log('this.props- ', this.props);
+	      var self = this;
+	      var props = this.props;
+	      var allSeries = props.allSeries;
+	      var yScale = props.yScale;
+	      var xScale = d3.scale.ordinal().domain(d3.range(props.data.length)).rangeRoundBands([0, props.size.width], 0.05);
+	      var otherSeries = allSeries.filter(function (component) {
+	        return component.label !== props.label;
+	      });
+	      var bars = props.data.map(function (point, i) {
+
+	        var yOffset = 0;
+	        console.log('point- ', point);
+
+	        otherSeries.map(function (series) {
+	          yOffset = yOffset + series.data[i];
+	        });
+	        console.log('yOffset- ', yOffset);
+
+	        //   <Bar height={yScale(point)} width={xScale.rangeBand()} offset={xScale(i)} availableHeight={props.height} color={props.color} key={i} />
+	        return _react2.default.createElement(_StackedBar2.default, { height: yScale(point), width: xScale.rangeBand(), x: xScale(i), y: props.size.height - yScale(yOffset) - yScale(point), color: props.color, key: i });
+	      });
+	      return _react2.default.createElement(
+	        'g',
+	        null,
+	        bars
+	      );
+	    }
+	  }]);
+
+	  return StackedDataSeries;
+	}(_react.Component);
+
+	StackedDataSeries.propTypes = {
+	  title: _react.PropTypes.string,
+	  data: _react.PropTypes.array.isRequired
+	};
+	StackedDataSeries.defaultProps = {
+	  title: '',
+	  data: []
+	};
+	exports.default = StackedDataSeries;
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var StackedBar = function (_Component) {
+	  _inherits(StackedBar, _Component);
+
+	  function StackedBar(props) {
+	    _classCallCheck(this, StackedBar);
+
+	    return _possibleConstructorReturn(this, (StackedBar.__proto__ || Object.getPrototypeOf(StackedBar)).call(this, props));
+	  }
+
+	  _createClass(StackedBar, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('rect', { fill: this.props.color,
+	        width: this.props.width, height: this.props.height,
+	        x: this.props.x, y: this.props.y });
+	    }
+	  }]);
+
+	  return StackedBar;
+	}(_react.Component);
+
+	StackedBar.propTypes = {
+	  width: _react.PropTypes.number,
+	  height: _react.PropTypes.number,
+	  x: _react.PropTypes.number,
+	  y: _react.PropTypes.number
+	};
+	StackedBar.defaultProps = {
+	  width: 0,
+	  height: 0,
+	  x: 0,
+	  y: 0
+	};
+	exports.default = StackedBar;
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _d = __webpack_require__(177);
+
+	var _d2 = _interopRequireDefault(_d);
+
+	var _Chart = __webpack_require__(173);
+
+	var _Chart2 = _interopRequireDefault(_Chart);
+
+	var _DataCircles = __webpack_require__(190);
+
+	var _DataCircles2 = _interopRequireDefault(_DataCircles);
+
+	var _XYAxis = __webpack_require__(184);
+
+	var _XYAxis2 = _interopRequireDefault(_XYAxis);
+
+	var _D3Helpers = __webpack_require__(191);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ScatteredPlot = function (_Component) {
+	  _inherits(ScatteredPlot, _Component);
+
+	  function ScatteredPlot(props) {
+	    _classCallCheck(this, ScatteredPlot);
+
+	    return _possibleConstructorReturn(this, (ScatteredPlot.__proto__ || Object.getPrototypeOf(ScatteredPlot)).call(this, props));
+	  }
+
+	  _createClass(ScatteredPlot, [{
+	    key: 'render',
+	    value: function render() {
+	      var _extends2;
+
+	      var scales = { xScale: (0, _D3Helpers.xScale)(this.props.padding, this.props.width, this.props.data), yScale: (0, _D3Helpers.yScale)(this.props.padding, this.props.height, this.props.data) };
+	      return _react2.default.createElement(
+	        _Chart2.default,
+	        { width: this.props.width, height: this.props.height, title: this.props.title },
+	        _react2.default.createElement(_DataCircles2.default, _extends({}, this.props, scales)),
+	        _react2.default.createElement(_XYAxis2.default, _extends((_extends2 = { height: this.props.height, width: this.props.width }, _defineProperty(_extends2, 'height', this.props.height), _defineProperty(_extends2, 'padding', this.props.padding), _extends2), scales))
+	      );
+	    }
+	  }]);
+
+	  return ScatteredPlot;
+	}(_react.Component);
+
+	ScatteredPlot.propTypes = {
+	  width: _react.PropTypes.number,
+	  height: _react.PropTypes.number,
+	  padding: _react.PropTypes.number,
+	  title: _react.PropTypes.string,
+	  data: _react.PropTypes.array.isRequired
+	};
+	ScatteredPlot.defaultProps = {
+	  width: 300,
+	  height: 350,
+	  padding: 0,
+	  title: '',
+	  Legend: true
+	};
+	exports.default = ScatteredPlot;
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var renderCircles = function renderCircles(props) {
+	  return function (coords, index) {
+	    var circleProps = {
+	      cx: props.xScale(coords[0]),
+	      cy: props.yScale(coords[1]),
+	      r: 2,
+	      key: index
+	    };
+	    return _react2.default.createElement('circle', circleProps);
+	  };
+	};
+
+	var DataCircles = function (_Component) {
+	  _inherits(DataCircles, _Component);
+
+	  function DataCircles() {
+	    _classCallCheck(this, DataCircles);
+
+	    return _possibleConstructorReturn(this, (DataCircles.__proto__ || Object.getPrototypeOf(DataCircles)).apply(this, arguments));
+	  }
+
+	  _createClass(DataCircles, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'g',
+	        null,
+	        this.props.data.map(renderCircles(this.props))
+	      );
+	    }
+	  }]);
+
+	  return DataCircles;
+	}(_react.Component);
+
+	DataCircles.propTypes = {
+	  data: _react.PropTypes.array.isRequired
+	};
+	exports.default = DataCircles;
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.yScale = exports.xScale = exports.yMax = exports.xMax = undefined;
+
+	var _d = __webpack_require__(177);
+
+	var _d2 = _interopRequireDefault(_d);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/*
+	 * Returns the largest X coordinate from the data set
+	 */
+	var xMax = function xMax(data) {
+	  return _d2.default.max(data, function (d) {
+	    return d[0];
+	  });
+	};
+
+	/*
+	 * Returns the higest Y coordinate from the data set
+	 */
+	var yMax = function yMax(data) {
+	  return _d2.default.max(data, function (d) {
+	    return d[1];
+	  });
+	};
+
+	/*
+	 * Returns a function that "scales" X coordinates from the data to fit the chart
+	 */
+	var xScale = function xScale(padding, width, data) {
+	  return _d2.default.scale.linear().domain([0, xMax(data)]).range([padding, width - padding * 2]);
+	};
+
+	/*
+	 * Returns a function that "scales" Y coordinates from the data to fit the chart
+	 */
+	var yScale = function yScale(padding, height, data) {
+	  return _d2.default.scale.linear().domain([0, yMax(data)]).range([height - padding, padding]);
+	};
+
+	exports.xMax = xMax;
+	exports.yMax = yMax;
+	exports.xScale = xScale;
+	exports.yScale = yScale;
+
+/***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Chart = __webpack_require__(173);
+
+	var _Chart2 = _interopRequireDefault(_Chart);
+
+	var _DataSeries = __webpack_require__(193);
+
+	var _DataSeries2 = _interopRequireDefault(_DataSeries);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LineChart = function (_Component) {
+	  _inherits(LineChart, _Component);
+
+	  function LineChart(props) {
+	    _classCallCheck(this, LineChart);
+
+	    return _possibleConstructorReturn(this, (LineChart.__proto__ || Object.getPrototypeOf(LineChart)).call(this, props));
+	  }
+
+	  _createClass(LineChart, [{
+	    key: 'render',
+	    value: function render() {
+	      var data = this.props.data;
+	      var size = { width: this.props.width, height: this.props.height };
+	      var lineCharts = [];
+	      var max = 0;
+
+	      data.forEach(function (element, index, array) {
+	        element.data.forEach(function (component, index, array) {
+	          if (component.y > max) {
+	            max = component.y;
+	          }
+	        });
+	      });
+	      var xScale = d3.scale.linear().domain([0, 6]).range([0, this.props.width]);
+
+	      var yScale = d3.scale.linear().domain([0, max]).range([this.props.height, 0]);
+
+	      data.forEach(function (element, index, array) {
+	        lineCharts.push(_react2.default.createElement(_DataSeries2.default, { data: element.data, size: size, xScale: xScale, yScale: yScale, key: element.label, ref: element.label, color: element.color }));
+	      });
+
+	      return _react2.default.createElement(
+	        _Chart2.default,
+	        { width: this.props.width, height: this.props.height },
+	        lineCharts
+	      );
+	    }
+	  }]);
+
+	  return LineChart;
+	}(_react.Component);
+
+	LineChart.propTypes = {
+	  height: _react.PropTypes.number,
+	  width: _react.PropTypes.number
+	};
+	LineChart.defaultProps = {
+	  height: 600,
+	  width: 300
+	};
+	exports.default = LineChart;
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _d = __webpack_require__(177);
+
+	var _d2 = _interopRequireDefault(_d);
+
+	var _Line = __webpack_require__(194);
+
+	var _Line2 = _interopRequireDefault(_Line);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DataSeries = function (_Component) {
+	  _inherits(DataSeries, _Component);
+
+	  function DataSeries() {
+	    _classCallCheck(this, DataSeries);
+
+	    return _possibleConstructorReturn(this, (DataSeries.__proto__ || Object.getPrototypeOf(DataSeries)).apply(this, arguments));
+	  }
+
+	  _createClass(DataSeries, [{
+	    key: 'render',
+	    value: function render() {
+
+	      var self = this;
+	      var props = this.props;
+	      var yScale = props.yScale;
+	      var xScale = props.xScale;
+
+	      var path = _d2.default.svg.line().x(function (d) {
+	        return xScale(d.x);
+	      }).y(function (d) {
+	        return yScale(d.y);
+	      }).interpolate(this.props.interpolate);
+
+	      return _react2.default.createElement(_Line2.default, { path: path(this.props.data), color: this.props.color });
+	    }
+	  }]);
+
+	  return DataSeries;
+	}(_react.Component);
+
+	DataSeries.propTypes = {
+	  data: _react.PropTypes.array,
+	  interpolate: _react.PropTypes.string
+	};
+	DataSeries.defaultProps = {
+	  data: [],
+	  interpolate: 'linear'
+	};
+	exports.default = DataSeries;
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Line = function (_Component) {
+	  _inherits(Line, _Component);
+
+	  function Line() {
+	    _classCallCheck(this, Line);
+
+	    return _possibleConstructorReturn(this, (Line.__proto__ || Object.getPrototypeOf(Line)).apply(this, arguments));
+	  }
+
+	  _createClass(Line, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('path', { d: this.props.path, stroke: this.props.color, strokeWidth: this.props.width, fill: 'none' });
+	    }
+	  }]);
+
+	  return Line;
+	}(_react.Component);
+
+	Line.propTypes = {
+	  path: _react.PropTypes.string,
+	  color: _react.PropTypes.string,
+	  width: _react.PropTypes.number
+	};
+	Line.defaultProps = {
+	  path: '',
+	  color: 'blue',
+	  width: 2
+	};
+	exports.default = Line;
 
 /***/ }
 /******/ ]);
