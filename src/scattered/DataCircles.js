@@ -1,16 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-
-const renderCircles = (props) => {
-  return (coords, index) => {
-    const circleProps = {
-      cx: props.xScale(coords[0]),
-      cy: props.yScale(coords[1]),
-      r: 2,
-      key: index
-    };
-    return <circle {...circleProps} />;
-  };
-};
+import Circle from './Circle';
 
 export default class DataCircles extends Component {
 
@@ -19,6 +8,10 @@ export default class DataCircles extends Component {
   }
 
   render() {
-    return <g>{ this.props.data.map(renderCircles(this.props)) }</g>
+    let props = this.props;
+    let circles = props.data.map(function(coords, index) {
+      return <Circle coords={coords} key={index} index={index} xScale={props.xScale} yScale={props.yScale}/>
+    });
+    return <g>{circles}</g>
   }
 }

@@ -20,8 +20,7 @@ export default class ScatteredPlot extends Component {
     width: 300,
     height: 350,
     padding: 0,
-    title: '',
-    Legend: true
+    title: ''
   }
 
   constructor(props) {
@@ -33,7 +32,7 @@ export default class ScatteredPlot extends Component {
     return (
         <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
           <DataCircles {...this.props} {...scales} />
-          <XYAxis height={this.props.height} width={this.props.width} height={this.props.height} padding={this.props.padding} {...scales}/>
+          <XYAxis height={this.props.height} width={this.props.width} padding={this.props.padding} {...scales}/>
         </Chart>
     );
   }
