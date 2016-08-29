@@ -19,7 +19,6 @@ export default class StackedDataSeries extends Component {
 
   render() {
 
-    console.log('this.props- ', this.props);
     let self = this;
     let props = this.props;
     let allSeries = props.allSeries;
@@ -33,12 +32,10 @@ export default class StackedDataSeries extends Component {
     let bars = props.data.map(function(point, i) {
 
       let yOffset = 0;
-      console.log('point- ', point);
 
       otherSeries.map(function(series) {
         yOffset = yOffset + series.data[i];
       });
-      console.log('yOffset- ', yOffset);
 
     //   <Bar height={yScale(point)} width={xScale.rangeBand()} offset={xScale(i)} availableHeight={props.height} color={props.color} key={i} />
       return (

@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import Chart from '../Chart';
+import Chart from '../../Chart';
 import DataSeries from './DataSeries';
 
 export default class LineChart extends Component {
