@@ -10,9 +10,8 @@ import Donut from './pie/Donut';
 import Pie from './pie/Pie';
 import BarChart from './pie/BarChart';
 import ScatteredPlot from './scattered/ScatteredPlot';
-import LineChart from './line/LineChart';
 import TimeSeriesLineChart from './line/time/TimeSeriesLineChart';
-import LineChartWithAxis from './line/full/LineChart';
+import LineChart from './line/full/LineChart';
 
 module.exports = {
   Pie,
@@ -20,6 +19,5 @@ module.exports = {
   BarChart,
   ScatteredPlot,
   LineChart,
-  TimeSeriesLineChart,
-  LineChartWithAxis
+  TimeSeriesLineChart
 };

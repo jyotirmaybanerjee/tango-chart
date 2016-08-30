@@ -8,9 +8,7 @@ Reusable Chart Components React D3 Bar line scattered plot pie
 
 ## Install
 
-  ~~npm install tango-chart --save~~
-  
-  npm install git://github.com/jyotirmaybanerjee/tango-chart.git
+  npm install tango-chart --save
 
 ## Tests
 
