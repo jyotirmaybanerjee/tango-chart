@@ -1,51 +1,53 @@
-import React, { Component, PropTypes } from 'react';
+import React, {PropTypes} from 'react';
 import d3 from 'd3';
-import StackedDataSeries from './StackedDataSeries';
+import StackedBars from './StackedBars';
 import Chart from '../../Chart';
 
-export default class StackedBarChart extends Component {
+const StackedBarChart = (props) => {
+  const size = {width: props.width, height: props.height};
+  const totals = [];
+  const stackedSerieses = [];
 
-  static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number
-  }
-
-  static defaultProps = {
-    width: 600,
-    height: 300
-  }
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-
-    let self = this;
-    let data = this.props.data;
-    let size = { width: this.props.width, height: this.props.height };
-    let totals = [];
-    let stackedSerieses = [];
-    data.forEach(function(element, index, array) {
-      element.data.forEach(function(element, index, array) {
-        if(totals[index]) {
-          totals[index] = totals[index] + element;
-        } else {
-          totals[index] = element;
-        }
-      });
+  props.data.forEach((element) => {
+    element.data.forEach((subElement, index) => {
+      totals[index] = totals[index] ? totals[index] + subElement : subElement;
     });
-    let yScale = d3.scale.linear()
-      .domain([0, d3.max(totals)])
-      .range([0, this.props.height]);
-    data.forEach(function(element, index, array) {
-      stackedSerieses.push(<StackedDataSeries key={element.label} data={element.data} label={element.label} color={element.color} size={size} yScale={yScale} allSeries={self.props.data} />);
-    });
+  });
 
-    return (
-      <Chart width={this.props.width} height={this.props.height}>
-        {stackedSerieses}
-      </Chart>
+  const yScale = d3.scale.linear()
+    .domain([0, d3.max(totals)])
+    .range([0, props.height]);
+
+  props.data.forEach((element) => {
+    stackedSerieses.push(
+      <StackedBars
+        key={element.label}
+        data={element.data}
+        label={element.label}
+        color={element.color}
+        size={size}
+        yScale={yScale}
+        allSeries={props.data}
+      />
     );
-  }
-}
+  });
+
+  return (
+    <Chart width={props.width} height={props.height}>
+      {stackedSerieses}
+    </Chart>
+  );
+};
+
+StackedBarChart.propTypes = {
+  data: PropTypes.array.isRequired,
+  height: PropTypes.number,
+  width: PropTypes.number
+};
+
+StackedBarChart.defaultProps = {
+  height: 300,
+  width: 600
+};
+
+export default StackedBarChart;

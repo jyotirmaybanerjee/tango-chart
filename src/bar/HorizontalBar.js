@@ -1,14 +1,10 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
 
-export default class HorizontalBar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (<div>MyComponent</div>);
-  }
-}
+const HorizontalBar = (props) => {
+  return <div>MyComponent</div>;
+};
 
 HorizontalBar.propTypes = {
 };
+
+export default HorizontalBar;

@@ -1,43 +1,51 @@
-import React, { Component, PropTypes } from 'react';
+import React, {PropTypes} from 'react';
 import Chart from '../Chart';
 import Legend from '../legend/Legend';
 import DataSeries from './DataSeries';
 
-export default class Donut extends Component {
+const Donut = (props) => {
+  const legend = props.legend ?
+    (
+      <Legend
+        data={props.data}
+        width={props.width - 100}
+        height={props.height}
+      />
+    ) : <span />;
 
-  static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
-    title: PropTypes.string,
-    data: PropTypes.array.isRequired
-  }
+  const colors = ['#FD9827', '#DA3B21', '#3669C9', '#1D9524', '#971497'];
+  return (
+    <div>
+      <Chart
+        width={props.width}
+        height={props.height}
+        title={props.title}
+      >
+        <DataSeries
+          data={props.data}
+          colors={colors}
+          width={props.width}
+          height={props.height}
+          donut={true}
+        />
+      </Chart>
+      {legend}
+    </div>
+  );
+};
 
-  static defaultProps = {
-    width: 300,
-    height: 350,
-    title: ''
-  }
+Donut.propTypes = {
+  width: PropTypes.number,
+  height: PropTypes.number,
+  legend: PropTypes.bool,
+  title: PropTypes.string,
+  data: PropTypes.array.isRequired
+};
 
-  constructor(props) {
-    super(props);
-  }
+Donut.defaultProps = {
+  width: 300,
+  height: 350,
+  title: ''
+};
 
-  render() {
-
-    let legend = <span />;
-    if(this.props.legend) {
-      legend = <Legend data={this.props.data} width={this.props.width - 100} height={this.props.height} />;
-    }
-
-    let colors = ['#FD9827', '#DA3B21', '#3669C9', '#1D9524', '#971497'];
-    return (
-      <div>
-        <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
-          <DataSeries data={this.props.data} colors={colors} width=
-            {this.props.width} height={this.props.height} donut={true}/>
-        </Chart>
-        {legend}
-      </div>
-    );
-  }
-}
+export default Donut;

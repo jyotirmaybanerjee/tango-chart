@@ -1,48 +1,76 @@
 {
   "env": {
     "browser": true,
+    "es6": true,
     "node": true,
-    "es6": true
+    "mocha": true
   },
-  "ecmaFeatures": {
-    "modules": true,
-    "jsx": true
-  },
+  "extends": [
+    "airbnb",
+    "plugin:jsx-a11y/recommended",
+    "plugin:lodash/recommended",
+    "plugin:react/recommended"
+  ],
   "globals": {
-    "fetch": true,
-    "describe": true,
-    "it": true,
-    "sinon": true
+    "_": true
   },
   "parser": "babel-eslint",
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["babel", "import", "jsx-a11y", "lodash", "react"],
   "rules": {
-    "strict": [
-      2,
-      "global"
-    ],
-    "indent": [
-      1,
-      2
-    ],
-    "quotes": [
-      1,
-      "single"
-    ],
+    "array-bracket-spacing": 1,
+    "arrow-body-style": 0,
+    "class-methods-use-this": 0,
+    "comma-dangle": [1, "only-multiline"],
+    "curly": 0,
+    "import/no-dynamic-require": 0,
+    "import/prefer-default-export": 0,
+    "indent": [1, 2],
+    "jsx-a11y/anchor-has-content": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/label-has-for": 1,
+    "jsx-a11y/no-onchange": 0,
+    "jsx-a11y/onclick-has-focus": 0,
+    "jsx-a11y/onclick-has-role": 0,
+    "jsx-a11y/role-has-required-aria-props": 0,
+    "jsx-a11y/role-supports-aria-props": 0,
+    "jsx-a11y/scope": 0,
+    "jsx-a11y/tabindex-no-positive": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "lodash/path-style": 0,
+    "lodash/prefer-constant": 0,
+    "lodash/prefer-lodash-method": 0,
+    "lodash/prefer-startswith": 0,
+    "max-len": [1, 120, 4],
+    "no-bitwise": 0,
+    "no-case-declarations": 0,
+    "no-mixed-operators": 0,
+    "no-nested-ternary": 0,
+    "no-param-reassign": 0,
+    "no-plusplus": 0,
+    "no-underscore-dangle": 0,
+    "no-unused-vars": 1,
+    "no-template-curly-in-string": 0,
+    "object-curly-spacing": [1, "never"],
+    "object-shorthand": 1,
+    "prefer-template": 0,
     "react/display-name": 0,
-    "react/jsx-no-undef": 1,
-    "react/jsx-sort-props": 0,
-    "react/jsx-uses-react": 1,
-    "react/jsx-uses-vars": 1,
-    "react/no-did-mount-set-state": 1,
-    "react/no-did-update-set-state": 1,
-    "react/no-multi-comp": 1,
-    "react/no-unknown-property": 1,
-    "react/prop-types": 0,
-    "react/react-in-jsx-scope": 1,
-    "react/self-closing-comp": 1,
-    "react/wrap-multilines": 1
+    "react/forbid-prop-types": [0, {"forbid": ["any"]}],
+    "react/jsx-boolean-value": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-first-prop-new-line": 0,
+    "react/jsx-indent": [1, 2],
+    "react/jsx-indent-props": [1, 2],
+    "react/jsx-key": 1,
+    "react/jsx-no-bind": 0,
+    "react/no-find-dom-node": 0,
+    "react/no-multi-comp": 0,
+    "react/no-unused-prop-types": 0,
+    "react/prefer-stateless-function": 0,
+    "react/sort-comp" : [1, {
+        "order": [
+            "static-methods", "lifecycle", "everything-else", "render"
+        ]
+    }],
+    "semi": [1, "always"]
   }
 }

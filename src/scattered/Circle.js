@@ -1,14 +1,20 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
 
-export default class Circle extends Component {
+const Circle = (props) => {
+  const circleProps = {
+    cx: props.xScale(props.coords[0]),
+    cy: props.yScale(props.coords[1]),
+    r: 2,
+    key: props.index
+  };
+  return <circle {...circleProps} />;
+};
 
-  render() {
-    const circleProps = {
-      cx: this.props.xScale(this.props.coords[0]),
-      cy: this.props.yScale(this.props.coords[1]),
-      r: 2,
-      key: this.props.index
-    };
-    return <circle {...circleProps} />;
-  }
-}
+Circle.propTypes = {
+  coords: PropTypes.array,
+  index: PropTypes.number,
+  xScale: PropTypes.func,
+  yScale: PropTypes.func
+};
+
+export default Circle;

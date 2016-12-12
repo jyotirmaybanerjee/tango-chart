@@ -1,53 +1,46 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
 import d3 from 'd3';
-
 import Sector from './Sector';
 import DonutSector from './DonutSector';
 
-export default class DataSeries extends Component {
+const DataSeries = (props) => {
+  const pie = d3.layout.pie();
+  const result = props.data.map(item => item.value);
+  const names = props.data.map(item => item.label);
+  const sum = result.reduce((memo, num) => (memo + num), 0);
+  const position = 'translate(' + props.width / 2 + ',' + props.height / 2 + ')';
+  const arcs = pie(result);
+  const bars = arcs.map((point, i) => {
+    return (props.donut ?
+      <DonutSector
+        data={point}
+        key={i}
+        index={i}
+        name={names[i]}
+        color={props.data[i].color}
+        total={sum}
+        width={props.width}
+        height={props.height}
+      /> :
+      <Sector
+        data={point}
+        key={i}
+        index={i}
+        name={names[i]}
+        color={props.data[i].color}
+        total={sum}
+        width={props.width}
+        height={props.height}
+      />
+    )
+  });
+  return <g transform={position}>{bars}</g>;
+};
 
-  static propTypes = {
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    data: PropTypes.array.isRequired
-  }
+DataSeries.propTypes = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  data: PropTypes.array.isRequired
+};
 
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-
-    let data = this.props.data;
-    let width = this.props.width;
-    let height = this.props.height;
-    let pie = d3.layout.pie();
-    let result = data.map(function(item){
-      return item.value;
-    });
-    let names = data.map(function(item){
-      return item.label;
-    });
-    let sum = result.reduce(function(memo, num){ return memo + num; }, 0);
-    let position = 'translate(' + (width)/2 + ',' + (height)/2 + ')';
-    let arcs = pie(result);
-    let self = this;
-    let bars = arcs.map(function(point, i) {
-
-      if(self.props.donut) {
-        return (
-          <DonutSector data={point} key={i} index={i} name={names[i]} color={self.props.data[i].color} total=
-            {sum} width={width} height={height} />
-        )
-      } else {
-        return (
-          <Sector data={point} key={i} index={i} name={names[i]} color={self.props.data[i].color} total=
-            {sum} width={width} height={height} />
-        )
-      }
-    });
-    return (
-      <g transform={position}>{bars}</g>
-    );
-  }
-}
+export default DataSeries;

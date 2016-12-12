@@ -1,27 +1,34 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
 import LegendElement from './LegendElement';
 
-export default class Legend extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    let data = this.props.data;
-    let elements = data.map(function(item, i){
-      return (
-        <LegendElement xpos="0" ypos={100+i*20} color={item.color} data={item.label} key={i}/>
-      )
-    });
-
-    return(
-      <svg className="legend" width={this.props.width} height={this.props.height}>{elements}</svg>
+const Legend = (props) => {
+  const elements = props.data.map((item, i) => {
+    return (
+      <LegendElement
+        xpos="0"
+        ypos={100 + i * 20}
+        color={item.color}
+        data={item.label}
+        key={i}
+      />
     );
-  }
-}
+  });
+
+  return (
+    <svg
+      className="legend"
+      width={props.width}
+      height={props.height}
+    >
+      {elements}
+    </svg>
+  );
+};
 
 Legend.propTypes = {
-  width: PropTypes.number,
+  data: PropTypes.array.isRequired,
   height: PropTypes.number,
-  data: PropTypes.array.isRequired
+  width: PropTypes.number
 };
+
+export default Legend;

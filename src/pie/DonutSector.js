@@ -3,23 +3,36 @@ import d3 from 'd3';
 
 export default class DonutSector extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-      opacity:'arc'
-    }
+  static propTypes = {
+    color: PropTypes.string,
+    data: PropTypes.object,
+    label: PropTypes.string,
+    total: PropTypes.number,
+    width: PropTypes.number
+  }
+
+  state = {
+    text: '',
+    opacity: 'arc'
+  }
+
+  onBlur = () => {
+    console.log('On Blur ' + this.props.label);
+  }
+
+  onFocus = () => {
+    console.log('On Focus ' + this.props.label);
   }
 
   onMouseOver = () => {
-    this.setState({text: '', opacity:'arc-hover'});
-    var percent = (this.props.data.value/this.props.total)*100;
-    percent = percent.toFixed(1);
+    this.setState({text: '', opacity: 'arc-hover'});
+    const percent = ((this.props.data.value / this.props.total) *
+      100).toFixed(1);
     this.setState({text: percent + ' %'});
   }
 
   onMouseOut = () => {
-    this.setState({text: '', opacity:'arc'});
+    this.setState({text: '', opacity: 'arc'});
   }
 
   onClick = () => {
@@ -27,20 +40,44 @@ export default class DonutSector extends Component {
   }
 
   render() {
-    let outerRadius = this.props.width/2.2;
-    let innerRadius = this.props.width/5;
-    let arc = d3.svg.arc()
+    const outerRadius = this.props.width / 2.2;
+    const innerRadius = this.props.width / 5;
+    const arc = d3.svg.arc()
       .outerRadius(outerRadius)
       .innerRadius(innerRadius);
-    let data = this.props.data;
-    let center = 'translate(' + arc.centroid(data) + ')';
-    let percentCenter = 'translate(0,3)';
-    // let color = this.props.color;
+    const data = this.props.data;
+    const center = 'translate(' + arc.centroid(data) + ')';
+    const percentCenter = 'translate(0,3)';
     return (
-      <g onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut} onClick={this.onClick}>
-        <path className={this.state.opacity} fill={this.props.color} d={arc(this.props.data)} />
-        <text fill="white" transform={center} textAnchor="middle" fontSize="15px">{data.value}</text>
-        <text fill={this.props.color} stroke={this.props.color} fontSize="15px" transform={percentCenter} textAnchor="middle">{this.state.text}</text>
+      <g
+        onMouseOver={this.onMouseOver}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
+        onMouseOut={this.onMouseOut}
+        onClick={this.onClick}
+      >
+        <path
+          className={this.state.opacity}
+          fill={this.props.color}
+          d={arc(this.props.data)}
+        />
+        <text
+          fill="white"
+          transform={center}
+          textAnchor="middle"
+          fontSize="15px"
+        >
+          {data.value}
+        </text>
+        <text
+          fill={this.props.color}
+          stroke={this.props.color}
+          fontSize="15px"
+          transform={percentCenter}
+          textAnchor="middle"
+        >
+          {this.state.text}
+        </text>
       </g>
     );
   }

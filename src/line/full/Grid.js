@@ -7,26 +7,29 @@ export default class Grid extends Component {
   static propTypes = {
     h: PropTypes.number,
     grid: PropTypes.func,
-    gridType: PropTypes.oneOf(['x','y'])
-  }
-
-  componentDidUpdate() {
-    this.renderGrid();
+    gridType: PropTypes.oneOf(['x', 'y'])
   }
 
   componentDidMount() {
     this.renderGrid();
   }
 
+  componentDidUpdate() {
+    this.renderGrid();
+  }
+
   renderGrid() {
-    let node = ReactDOM.findDOMNode(this);
+    const node = ReactDOM.findDOMNode(this);
     d3.select(node).call(this.props.grid);
   }
 
-  render () {
-    let translate = 'translate(0,'+(this.props.h)+')';
+  render() {
+    const translate = 'translate(0,' + this.props.h + ')';
     return (
-      <g className="y-grid" transform={this.props.gridType === 'x' ? translate : ''} />
+      <g
+        className="y-grid"
+        transform={this.props.gridType === 'x' ? translate : ''}
+      />
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, {PropTypes, Component} from 'react';
+import d3 from 'd3';
 import Chart from '../../Chart';
 import DataSeries from './DataSeries';
 import Axis from './Axis';
@@ -26,83 +27,78 @@ export default class LineChart extends Component {
     gridY: false
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      tooltip: { display:false,data:{key:'', value:''}}
-    }
+  state = {
+    tooltip: {display: false, data: {key: '', value: ''}}
   }
 
   showToolTip = (e) => {
     e.target.setAttribute('fill', '#FFFFFF');
-
-    this.setState({tooltip:{
-      display: true,
-      data: {
-        key: e.target.getAttribute('data-key'),
-        value: e.target.getAttribute('data-value')
-      },
-      pos: {
-        x: e.target.getAttribute('cx'),
-        y: e.target.getAttribute('cy')
+    this.setState({
+      tooltip: {
+        display: true,
+        data: {
+          key: e.target.getAttribute('data-key'),
+          value: e.target.getAttribute('data-value')
+        },
+        pos: {
+          x: e.target.getAttribute('cx'),
+          y: e.target.getAttribute('cy')
+        }
       }
-    }});
+    });
   }
 
   hideToolTip = (e) => {
     e.target.setAttribute('fill', '#7dc7f4');
-    this.setState({tooltip:{ display:false,data:{key:'',value:''}}});
+    this.setState({tooltip: {display: false, data: {key: '', value: ''}}});
   }
 
   render() {
-
-    let props = this.props;
-    let data = this.props.data;
-    let margin = {top: 5, right: 50, bottom: 20, left: 50};
-    let w = this.props.width - (margin.left + margin.right);
-    let h = this.props.height - (margin.top + margin.bottom);
-    let size = { width: w, height: h };
-    let lineCharts = [];
+    const props = this.props;
+    const data = this.props.data;
+    const margin = {top: 5, right: 50, bottom: 20, left: 50};
+    const w = this.props.width - (margin.left + margin.right);
+    const h = this.props.height - (margin.top + margin.bottom);
+    const size = {width: w, height: h};
+    const lineCharts = [];
     let max = 0;
     let xAxis = null;
     let yAxis = null;
     let xGrid = null;
     let yGrid = null;
 
-    data.forEach(function(element, index, array) {
-      element.data.forEach(function(component, index, array) {
-        if(component.y > max) {
+    data.forEach((element) => {
+      element.data.forEach((component) => {
+        if (component.y > max) {
           max = component.y;
         }
       });
     });
 
-    let xScale = d3.scale.linear()
+    const xScale = d3.scale.linear()
       .domain([0, 6])
       .range([0, w]);
 
-    let yScale = d3.scale.linear()
+    const yScale = d3.scale.linear()
       .domain([0, max])
       .range([h, 0]);
 
-
-    if(props.axisX) {
+    if (props.axisX) {
       xAxis = d3.svg.axis()
         .scale(xScale)
         .orient('bottom')
-        .tickValues(data[0].data.map(function(d,i){
-          if(i>0)
-            return d.x;
+        .tickValues(data[0].data.map((d, i) => {
+          return (i > 0) ? d.x : null;
         }).splice(1))
         .ticks(5);
     }
-    if(props.axisY) {
+    if (props.axisY) {
       yAxis = d3.svg.axis()
         .scale(yScale)
         .orient('left')
         .ticks(5);
     }
-    if(props.gridX) {
+    if (props.gridX) {
       xGrid = d3.svg.axis()
         .scale(xScale)
         .orient('bottom')
@@ -110,7 +106,7 @@ export default class LineChart extends Component {
         .tickSize(-h, 0, 0)
         .tickFormat('');
     }
-    if(props.gridY) {
+    if (props.gridY) {
       yGrid = d3.svg.axis()
         .scale(yScale)
         .orient('left')
@@ -119,27 +115,35 @@ export default class LineChart extends Component {
         .tickFormat('');
     }
 
-    data.forEach(function(element, index, array) {
-      lineCharts.push(<DataSeries data={element.data} size={size} xScale={xScale} yScale={yScale} key={element.label} ref={element.label} color={element.color} />);
+    data.forEach((element) => {
+      lineCharts.push(
+        <DataSeries
+          data={element.data}
+          size={size}
+          xScale={xScale}
+          yScale={yScale}
+          key={element.label}
+          ref={element.label}
+          color={element.color}
+        />
+      );
     });
-    let transform='translate(' + margin.left + ',' + margin.top + ')';
-
+    const transform = 'translate(' + margin.left + ',' + margin.top + ')';
     let xgrid = <span />;
     let ygrid = <span />;
     let xaxis = <span />;
     let yaxis = <span />;
-
-    if(props.axisX) {
-      xaxis = <Axis h={h} axis={xAxis} axisType="x"/>;
+    if (props.axisX) {
+      xaxis = <Axis h={h} axis={xAxis} axisType="x" />;
     }
-    if(props.axisY) {
+    if (props.axisY) {
       yaxis = <Axis h={h} axis={yAxis} axisType="y" />;
     }
-    if(props.gridX) {
-      xgrid = <Grid h={h} grid={xGrid} gridType="x"/>;
+    if (props.gridX) {
+      xgrid = <Grid h={h} grid={xGrid} gridType="x" />;
     }
-    if(props.gridY) {
-      ygrid = <Grid h={h} grid={yGrid} gridType="y"/>;
+    if (props.gridY) {
+      ygrid = <Grid h={h} grid={yGrid} gridType="y" />;
     }
     return (
       <Chart width={this.props.width} height={this.props.height}>
@@ -149,8 +153,11 @@ export default class LineChart extends Component {
           {yaxis}
           {xaxis}
           {lineCharts}
-          {/*<Dots data={data} x={xScale} y={yScale} showToolTip={this.showToolTip} hideToolTip={this.hideToolTip}/>
-          <ToolTip tooltip={this.state.tooltip}/>*/}
+          {/*
+            <Dots data={data} x={xScale} y={yScale}
+            showToolTip={this.showToolTip} hideToolTip={this.hideToolTip}/>
+          <ToolTip tooltip={this.state.tooltip}/>
+          */}
         </g>
       </Chart>
     );

@@ -1,36 +1,29 @@
-import React, { Component, PropTypes } from 'react';
+import React, {PropTypes} from 'react';
 
-export default class CompTemplate extends Component {
-  constructor(props) {
-    super(props);
-  }
+const CompTemplate = (props) => {
+  const codeBlock = props.code ?
+  (
+    <div className="code">
+      <pre>
+        {props.code}
+      </pre>
+    </div>
+  ) : <span />;
 
-  render() {
+  return (
 
-    var codeBlock = <span />;
-    if (this.props.code) {
-      codeBlock = (
-        <div className="code">
-          <pre>
-            {this.props.code}
-          </pre>
-        </div>
-      );
-    }
-
-    return (
-
-      <div className="panel panel-default" style={{marginBottom: '36px'}}>
-        <div className="panel-heading">
-          <h3 className="panel-title">{this.props.label}</h3>
-        </div>
-        <div className="panel-body">
-          {this.props.children}
-          <div className="sample-code">
-            {codeBlock}
-          </div>
+    <div className="panel panel-default" style={{marginBottom: '36px'}}>
+      <div className="panel-heading">
+        <h3 className="panel-title">{props.label}</h3>
+      </div>
+      <div className="panel-body">
+        {props.children}
+        <div className="sample-code">
+          {codeBlock}
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default CompTemplate;

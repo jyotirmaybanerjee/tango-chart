@@ -1,35 +1,28 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
 import Chart from '../Chart';
-import DataSeries from './DataSeries';
-import XYAxis       from '../axis/XYAxis';
+import Bars from './Bars';
+// import XYAxis from '../axis/XYAxis';
 
-export default class BarChart extends Component {
+const BarChart = (props) => {
+  return (
+    <Chart {...props}>
+      <Bars {...props} />
+    </Chart>
+  );
+};
 
-  static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
-    padding: PropTypes.number,
-    title: PropTypes.string,
-    data: PropTypes.array.isRequired
-  }
+BarChart.propTypes = {
+  data: PropTypes.array.isRequired,
+  height: PropTypes.number,
+  padding: PropTypes.number,
+  title: PropTypes.string,
+  width: PropTypes.number
+};
 
-  static defaultProps = {
-    width: 300,
-    height: 350,
-    padding: 30,
-    title: ''
-  }
+BarChart.defaultProps = {
+  height: 350,
+  padding: 30,
+  width: 300
+};
 
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-
-    return (
-      <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
-        <DataSeries data={this.props.data} width={this.props.width} padding={this.props.padding} height={this.props.height} color={this.props.color} />
-      </Chart>
-    );
-  }
-}
+export default BarChart;

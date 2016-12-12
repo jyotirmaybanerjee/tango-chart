@@ -1,22 +1,22 @@
-import React, { PropTypes, Component } from 'react';
+import React, {PropTypes} from 'react';
 
-export default class Chart extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <svg width={this.props.width} height={this.props.height}>
-        <text textAnchor="middle" x="150" y="15">{this.props.title}</text>
-        {this.props.children}
-      </svg>
-    );
-  }
-}
+const Chart = (props) => {
+  return (
+    <svg width={props.width} height={props.height}>
+      {
+        props.title &&
+        <text textAnchor="middle" x="150" y="15">{props.title}</text>
+      }
+      {props.children}
+    </svg>
+  );
+};
 
 Chart.propTypes = {
-  width: PropTypes.number.isRequired,
+  children: PropTypes.node,
   height: PropTypes.number.isRequired,
-  children: PropTypes.node
+  title: PropTypes.string,
+  width: PropTypes.number.isRequired,
 };
+
+export default Chart;

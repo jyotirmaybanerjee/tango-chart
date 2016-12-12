@@ -1,30 +1,23 @@
-import React, {PropTypes, Component} from 'react';
-import Chart from '../Chart';
-import DataSeries from './DataSeries';
+import React, {PropTypes} from 'react';
 
-export default class Bar extends Component {
+const Bar = (props) => {
+  return (
+    <rect
+      fill={props.color}
+      width={props.width}
+      height={props.height}
+      x={props.offset}
+      y={props.availableHeight - props.height}
+    />
+  );
+};
 
-  static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
-    offset: PropTypes.number
-  }
+Bar.propTypes = {
+  availableHeight: PropTypes.number,
+  color: PropTypes.string,
+  height: PropTypes.number,
+  offset: PropTypes.number,
+  width: PropTypes.number
+};
 
-  static defaultProps = {
-    width: 0,
-    height: 0,
-    offset: 0
-  }
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <rect fill={this.props.color}
-        width={this.props.width} height={this.props.height}
-        x={this.props.offset} y={this.props.availableHeight - this.props.height} />
-    );
-  }
-}
+export default Bar;

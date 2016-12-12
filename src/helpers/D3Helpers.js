@@ -3,12 +3,12 @@ import d3 from 'd3';
 /*
  * Returns the largest X coordinate from the data set
  */
-const xMax   = (data)  => d3.max(data, (d) => d[0]);
+const xMax = (data) => d3.max(data, d => d[0]);
 
 /*
  * Returns the higest Y coordinate from the data set
  */
-const yMax   = (data)  => d3.max(data, (d) => d[1]);
+const yMax = (data) => d3.max(data, d => d[1]);
 
 /*
  * Returns a function that "scales" X coordinates from the data to fit the chart

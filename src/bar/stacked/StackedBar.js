@@ -1,30 +1,30 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
 
-export default class StackedBar extends Component {
+const StackedBar = (props) => {
+  return (
+    <rect
+      fill={props.color}
+      width={props.width}
+      height={props.height}
+      x={props.x}
+      y={props.y}
+    />
+  );
+};
 
-  static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
-    x: PropTypes.number,
-    y: PropTypes.number
-  }
+StackedBar.propTypes = {
+  color: PropTypes.string,
+  height: PropTypes.number,
+  width: PropTypes.number,
+  x: PropTypes.number,
+  y: PropTypes.number
+};
 
-  static defaultProps = {
-    width: 0,
-    height: 0,
-    x: 0,
-    y: 0
-  }
+StackedBar.defaultProps = {
+  height: 0,
+  width: 0,
+  x: 0,
+  y: 0
+};
 
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <rect fill={this.props.color}
-        width={this.props.width} height={this.props.height}
-        x={this.props.x} y={this.props.y} />
-    );
-  }
-}
+export default StackedBar;

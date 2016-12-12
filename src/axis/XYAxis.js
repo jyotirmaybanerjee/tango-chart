@@ -1,41 +1,37 @@
-import React, {PropTypes, Component} from 'react';
-import Axis from './axis';
+import React, {PropTypes} from 'react';
+import Axis from './Axis';
 
-export default class XYAxis extends Component {
+const XYAxis = (props) => {
+  const xSettings = {
+    translate: `translate(0, ${props.height - props.padding})`,
+    scale: props.xScale,
+    orient: 'bottom'
+  };
 
-  static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
-    padding: PropTypes.number
-  }
+  const ySettings = {
+    translate: `translate(${props.padding}, 0)`,
+    scale: props.yScale,
+    orient: 'left'
+  };
 
-  static defaultProps = {
-    width: 300,
-    height: 350,
-    padding: 5
-  }
+  return (
+    <g className="xy-axis">
+      <Axis {...xSettings} />
+      <Axis {...ySettings} />
+    </g>
+  );
+};
 
-  constructor(props) {
-    super(props);
-  }
+XYAxis.propTypes = {
+  width: PropTypes.number,
+  height: PropTypes.number,
+  padding: PropTypes.number
+};
 
-  render() {
-    const xSettings = {
-      translate: `translate(0, ${this.props.height - this.props.padding})`,
-      scale: this.props.xScale,
-      orient: 'bottom'
-    };
-    const ySettings = {
-      translate: `translate(${this.props.padding}, 0)`,
-      scale: this.props.yScale,
-      orient: 'left'
-    };
+XYAxis.defaultProps = {
+  width: 300,
+  height: 350,
+  padding: 5
+};
 
-    return (
-      <g className="xy-axis">
-        <Axis {...xSettings}/>
-        <Axis {...ySettings}/>
-      </g>
-    );
-  }
-}
+export default XYAxis;

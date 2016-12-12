@@ -6,7 +6,10 @@
   "main": "index.js",
   "scripts": {
     "build:example": "reactpack --no-extract --no-source-map --no-html example/index.js example/",
-    "prepublish": "./node_modules/.bin/babel -d lib src/"
+    "prepublish": "npm run lint:all && ./node_modules/.bin/babel -d lib src/",
+    "lint": "eslint ./src && echo 'No lint error.' ",
+    "lint:all": "eslint ./src && eslint ./example && echo 'No lint error.' ",
+    "upgrade": "ncu -u"
   },
   "repository": {
     "type": "git",
@@ -35,19 +38,28 @@
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
-    "babel-eslint": "^6.1.2",
+    "babel-eslint": "^7.1.1",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
-    "eslint-plugin-react": "^6.1.2",
-    "react": "^15.3.1",
-    "react-autosuggest": "^5.1.0",
-    "react-dom": "^15.3.1",
+    "babel-preset-stage-1": "^6.16.0",
+    "eslint": "^3.11.0",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.1",
+    "eslint-plugin-lodash": "^2.2.0",
+    "eslint-plugin-react": "^6.7.1",
+    "react-autosuggest": "^7.0.1",
     "react-input-autosize": "^1.1.0",
-    "reactpack": "^0.7.5"
+    "reactpack": "^0.9.0"
   },
   "dependencies": {
-    "d3": "^3.5.3",
+    "d3": "^4.4.0",
+    "lodash": "^4.17.2",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
     "underscore": "^1.8.3"
   }
 }
